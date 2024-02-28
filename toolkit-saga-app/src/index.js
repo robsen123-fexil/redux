@@ -1,22 +1,27 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import  {Provider} from 'react-redux';
-import CreateSagaMiddleware from 'redux-saga';
-import {configureStore} from '@reduxjs/toolkit';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import { Provider } from "react-redux";
+import createSagaMiddleware from "redux-saga"; // Import createSagaMiddleware
+import { configureStore } from "@reduxjs/toolkit";
+import songsReducer from "./songstate";
+import songsaga from "./songsaga";
 
-const saga= CreateSagaMiddleware();
-const store=configureSrore({
-  reducer:{}, 
-  middleware:[saga]
+const sagaMiddleware = createSagaMiddleware(); // Create an instance of sagaMiddleware
+
+const store = configureStore({
+  reducer: {
+    songs: songsReducer,
+  },
+  middleware: [sagaMiddleware],
 });
 
+sagaMiddleware.run(songsaga);
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+ReactDOM.render(
   <Provider store={store}>
     <App />
-  </Provider>
+  </Provider>,
+  document.getElementById("root")
 );
-
