@@ -14,11 +14,13 @@ const users = createSlice({
             return state
         },
         addUserSlice: (state, action) => {
+           
             state.push(action.payload)
             return state
         },
         editUserSlice: (state, action) => {
-            state = state.map(i => i.id == action.payload.id ? action.payload : i)
+           state.map((i) => (i.id === action.payload.id ? action.payload : i));
+
             return state
         },
         deleteUserSlice: (state, action) => {
