@@ -19,20 +19,11 @@ const MyForm = () => {
 
   const handleSubmit = () => {
     console.log("sdf")
-    if (user.id == 0){
-        dispatch(addUserSlice({ ...user , id: nanoid(8) })) ;
-        
+    user.id === 0 ? dispatch(addUserSlice({ ...user , id: nanoid(8) })) : dispatch(editUserSlice(user))
     
-         dispatch({ type: CREATE_USER, user: { ...user, id: nanoid(8) } })
-        
-    }
-    else{
-        dispatch(editUserSlice(user));
-        dispatch({ type: UPDATE_USER_BY_ID , user})
-         
+      ? dispatch({ type: CREATE_USER, user: { ...user, id: nanoid(8) } })
+      : dispatch({ type: UPDATE_USER_BY_ID, user });
 
-
-    }
     dispatch(
       setUserSlice({
         id: 0,

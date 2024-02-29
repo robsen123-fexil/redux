@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUserSlice } from "../redux/slice/user";
 import Button from "@mui/material/Button";
 import { DELETE_USER_BY_ID, GET_USERS } from "../redux/types";
-
+import { deleteUserSlice } from "../redux/slice/users"; 
 const MyTable = () => {
   const rows = useSelector((state) => state.users);
   const dispatch = useDispatch();
@@ -54,7 +54,7 @@ const MyTable = () => {
               </TableCell>
               <TableCell align="right">
                 <Button
-                  onClick={() => dispatch({ type: DELETE_USER_BY_ID, id: row.id })}
+                  onClick={() => dispatch(deleteUserSlice(row.id))}
                   fullWidth
                   variant="contained"
                 >
